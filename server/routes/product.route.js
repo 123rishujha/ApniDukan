@@ -9,7 +9,7 @@ const productRoute = express.Router();
 
 
 
-//routes starting 
+//routes starting -------------------//////////////////////////////////
 
 //create -> post product -> admin operations
 productRoute.post("/add",async(req,res)=>{
