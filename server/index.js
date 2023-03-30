@@ -1,9 +1,11 @@
 const express = require("express");
 require("dotenv").config();
+const cors = require("cors")
 const session = require("express-session");
 
 //require files below
 const { connection } = require('./connection');
+
 const { productRoute } = require("./routes/product.route");
 const { userRoute } = require("./routes/user.route");
 //middleware to authorize user
@@ -15,7 +17,7 @@ const app = express();
 
 //starting below
 app.use(express.json());
-
+app.use(cors())
 //configaring session middlware
 app.use(session({
     secret:"key",
