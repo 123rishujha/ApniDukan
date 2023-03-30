@@ -1,0 +1,18 @@
+.wrapper  {
+  width: 100%;
+  padding: 10px;
+  margin: auto;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.sidebar{
+  width: 20%;
+}
+
+.products{
+  width: 80%;
+}
+
