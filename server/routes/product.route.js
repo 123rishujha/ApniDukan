@@ -6,7 +6,9 @@ const { ProductModel } = require("../models/product.model"); // Product model/te
 ////->>> making product main productRouter variable here and calling Router method of express;
 const productRoute = express.Router();
 
-//routes starting
+
+
+//routes starting -------------------//////////////////////////////////
 
 //create -> post product -> admin operations
 productRoute.post("/add", async (req, res) => {
