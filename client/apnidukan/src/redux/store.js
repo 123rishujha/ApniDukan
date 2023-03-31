@@ -3,15 +3,14 @@ import thunk from "redux-thunk";
 
 
 //import reducers
-import { dummyReducer } from './dummy/dummy.reducer';
 import { reducer as ProductReducer } from './ProductReducer/reducer';
-
+import { authReducer } from './auth/auth.reducer';
 
 
 //add all the reducers here
 const rootReducer = combineReducers({
-    dummyReducer,
-    ProductReducer
+    ProductReducer,
+    authReducer
 });
 
 
