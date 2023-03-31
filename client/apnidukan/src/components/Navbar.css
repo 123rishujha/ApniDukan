@@ -1,0 +1,179 @@
+.header{
+    width: 100%;
+    margin: auto;
+    height: 60px;
+    background: #131921;
+    position: fixed;
+    top:0;
+    
+}
+.nav{ background: #131921;
+    width:100%;
+    margin: auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1px 10px 1px 10px;
+    
+}
+.leftnav{
+    background: #131921;
+    width:70%;
+height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+   
+}
+.logonav{
+    background: #131921;
+    height: 100%;
+   
+    padding-left: 15px;
+    width: 25%;
+}
+.logonav img{
+    height: 100%;
+}
+.navinput{
+    background: #131921;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    width: 70%;
+}
+.hamicon{
+    display: none;
+}
+.navinput input{
+    width:100%;
+    height:80%;
+    padding-left: 30px;
+    outline: none;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    font-size: 20px;
+    outline: none;
+}
+.navsearch{
+   width: 50px;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    background-color: #febd69;
+    justify-content: center;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+}
+.navsearchicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #febd69;
+    width: 100px;
+
+}
+.rightnav{
+    width:30%;
+    background: #131921;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+
+}
+.navsignin{
+    width:30%;
+    height: 80%;
+    color: #fff;
+    font-weight: 500;
+    font-size: 21px;
+    margin-right: 2px;
+    border-radius: 5px;
+    padding: 8px;
+    background: #131921;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navsignin:hover {
+    border: 1px solid #fff;
+    outline: #fff;
+    border-radius: 2px;
+}
+.navcart{
+    width: 30%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+    background-color: #131921;
+}
+.carticon{
+    color: #fff;
+    background-color: #131921;
+}
+.navcart p{
+    margin-top: -15%;
+    margin-left: -15%;
+    color: #fff;
+    background-color:transparent;
+    font-weight: 900;
+    font-size: 16px;
+
+}
+.navcart:hover{
+    border:1px solid #fff
+}
+@media (max-width:969px){
+    .rightnav{
+        justify-content: space-between;
+        gap:5px;
+    }
+    .navsignin{
+        font-size: 15px;
+        
+        width:45%;
+        margin-left: 20px;
+    }
+    .logonav{
+        width: 30%;
+        height: 60%;
+        margin-right: 20px;
+    }
+    .navcart{
+        width: 45%;
+    }
+    .navcart p{
+        margin-left: -10px;
+        padding: 0;
+       
+    }
+}
+@media (max-width:556px){
+    .rightnav{
+        display: none;
+    }
+    .logonav{
+        display: none;
+    }
+    .leftnav{
+        width:100%;
+    }
+    .navinput{
+        width: 80%;
+    }
+    .hamicon{
+        display: block;
+        width:10%;
+        height:60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #131921;
+    }
+}
