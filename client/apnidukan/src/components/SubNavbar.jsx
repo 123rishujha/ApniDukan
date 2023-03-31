@@ -1,10 +1,10 @@
 import React from 'react'
-import './SubNavbar.css'
+import Styles from './SubNavbar.module.css'
 import { Link } from 'react-router-dom'
 const SubNavbar = () => {
   return (
     
-    <div className="headernav">
+    <div className={Styles.headernav}>
     <ul>
     
       <li><Link to="#furniture">Furniture</Link></li>
