@@ -7,9 +7,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    /* border:1px solid red */
   }
   
   .headernav ul {
+ 
     list-style-type: none;
     display: flex;
     align-items: center;
@@ -19,11 +21,11 @@
   
   .headernav li {
     /* float: left; */
-    color:aliceblue;
+    color:orange;
     
   }
   
-  .headernav li a {
+  .headernav li  {
     display: block;
     color: white;
     text-align: center;
