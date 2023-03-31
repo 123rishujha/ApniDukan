@@ -50,7 +50,7 @@ userRoute.post("/login",async(req,res)=>{
                if(result){
                 const token = jwt.sign({"userId":findUser._id},"key",{ expiresIn: '1h' });
                 // console.log(token);
-                req.session.token=token
+                // req.session.token=token
                 res.status(200).send({success:true,message:'login successfull',token:token})
                }else{
                 

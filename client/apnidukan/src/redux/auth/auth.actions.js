@@ -51,7 +51,7 @@ export const loginSuccess = (payload) => async (dispatch) => {
       alert("Login successful");
     } else {
       dispatch(authError());
-      alert("you got error");
+      // alert("you got error");
     }
   } catch (err) {
     console.log("login error", err);
