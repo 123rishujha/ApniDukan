@@ -5,9 +5,10 @@ import AdminProducts from '../components/Admin/AdminProducts';
 import Product from '../pages/Product';
 import Login from "../pages/login/Login";
 import SignUp from '../pages/signup/SignUp';
-
+import Home from '../pages/Home'
 const AllRoutes = () =>{
     return(
+        <>
         <Routes>
             <Route path='/' element={<h1>Home</h1>} />
             <Route path='/products' element={<Product/>} />
@@ -22,6 +23,8 @@ const AllRoutes = () =>{
             
 
         </Routes>
+        <Home/>
+        </>
     )
 }
 
