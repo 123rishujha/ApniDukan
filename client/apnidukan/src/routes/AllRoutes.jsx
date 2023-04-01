@@ -5,13 +5,14 @@ import AdminProducts from '../components/Admin/AdminProducts';
 import Product from '../pages/Product';
 import Login from "../pages/login/Login";
 import SignUp from '../pages/signup/SignUp';
+import Home from '../pages/Home'
 import Cart from '../pages/cart/Cart';
 import CheckOut from '../pages/checkOut/CheckOut';
 
 const AllRoutes = () =>{
     return(
         <Routes>
-            <Route path='/' element={<h1>Home</h1>} />
+            <Route path='/' element={<Home/>} />
             <Route path='/products' element={<Product/>} />
             <Route path='/product/:id' element={<h1>productDetails</h1>} />
             <Route path='/cart' element={<Cart/>} />
