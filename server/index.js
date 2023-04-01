@@ -28,7 +28,7 @@ app.use(cors())
 // }));
 
 app.use("/user",userRoute);
-app.use(authorise);
+// app.use(authorise);
 app.use("/products",productRoute);
 app.use("/cart",cartRoute);
 
