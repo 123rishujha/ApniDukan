@@ -27,7 +27,7 @@ app.use(session({
 }));
 
 app.use("/user",userRoute);
-app.use(authorise);
+// app.use(authorise);
 app.use("/products",productRoute);
 
 
