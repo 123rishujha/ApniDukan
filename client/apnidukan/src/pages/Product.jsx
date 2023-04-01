@@ -1,21 +1,30 @@
 import React from "react";
-import styles from "./product.module.css"
 import ProductList from "../components/ProductList";
+import styles from "./products.module.css";
 import Sidebar from "../components/Sidebar";
+import Sort from "../components/Sort";
+
 
 const Product = () => {
   return (
-    <div>
-      <section>
-        <main className={styles.main} >
-          <Sidebar />
+  
+    <div className={styles.wrapper}>
+      <div className={styles.sidebar}>
+        <Sidebar />
+      </div>
+
+      <section className={styles.products}>
+        <div className="sort-filter">
+          <Sort />
+        </div>
+        <div className="main-product">
           <ProductList />
-        </main>
+        </div>
       </section>
     </div>
   );
 };
 
+
+
 export default Product;
-
-

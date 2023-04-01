@@ -1,23 +1,34 @@
-const jwt = require("jsonwebtoken");
 
+const jwt = require("jsonwebtoken")
 
 const authorise = (req,res,next) =>{
-    const sessionToken = req.session.token;
-    console.log("sessionToken from middleware",sessionToken);
-    if(sessionToken){
-        const decoded = jwt.verify(sessionToken, 'key');
-        if(decoded){
-            // if(req.method=="GET"){
-            //     next();
-            // }else{
-            //     req.body.userId = decoded.userId;
-            //     next();
-            // }
+    const token = req.headers?.authorization?.split(" ")[1];
+
+    // const sessionToken = req.session.token;
+    // console.log("sessionToken from middleware",sessionToken);
+
+    if(token){
+        try{
+            const decoded = jwt.verify(token,"key");
             req.body.userId = decoded.userId;
             next();
-        }else{
-            res.status(401).send({success:false,message:"Please Login first"});
         }
+        catch(err){
+            res.status(401).send({success:false,message:'not authorise,please login first'});
+        }
+        // console.log(token);
+        // if(decoded){
+        //     // if(req.method=="GET"){
+        //     //     next();
+        //     // }else{
+        //     //     req.body.userId = decoded.userId;
+        //     //     next();
+        //     // }
+        //     req.body.userId = decoded.userId;
+        //     next();
+        // }else{
+        //     res.status(401).send({success:false,message:"Please Login first"});
+        // }
     }
     else{
         res.status(401).send({success:false,mesage:"You are not authorize please login"});

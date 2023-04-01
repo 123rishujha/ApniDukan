@@ -1,19 +1,6 @@
 
-.wrapper  {
-  display: flex;
-  box-sizing: border-box;
-  gap: 5px;
-  padding: 15px;
-  margin-top: 5rem;
-}
 
-.filter{
-  width: 20%;
-}
 
-.productPage{
-  width: 80%;
-}
 
 .tag{
   font-size: 25px;
@@ -66,7 +53,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
   padding: 10px;
 }
 
@@ -146,22 +132,9 @@
   text-align: center;
 }
 
-/* SingleProduct */
 
-#singleproduct{
-  margin-top: 25px;
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-}
 
-#s_details{
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  height: 500px;
- 
-}
+
 
 #s_details1{
   border-bottom: 1px solid gray;
@@ -185,18 +158,9 @@
   justify-content: flex-start;
   gap: 30px;
   
-  
-  
 }
 
-.offers{
-  display: flex;
-  border: 1px dashed gray;
-  padding: 15px;
-  margin: 20px;
-  gap: 10px;
-  width: 50%;
-}
+
 
 .p{
   display: flex;
@@ -205,30 +169,13 @@
 }
 
 
-/* button */
 
-.buy_button{
-  align-content: center;
-  justify-content: center;
-  gap: 20px;
-  display: flex;
-  margin-top: 15px;
-}
 
-.buy_button button{
-  border: 1px solid gray;
-  padding: 20px;
-  color: white;
-  border-radius: 5px;
-}
 
-#magnifyer{
-  width: 300px;
-  height: 300px;
-}
 
 .card_img{
-  width: 250px;
+  width: 280px;
+  height: 250px;
 }
 
 
