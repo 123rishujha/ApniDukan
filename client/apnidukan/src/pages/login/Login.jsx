@@ -24,12 +24,16 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const token = useSelector((store) => store.authReducer.token);
+  const isError = useSelector((store) => store.authReducer.isError);
+  const isLoading = useSelector((store) => store.authReducer.isLoading);
   const dispatch = useDispatch();
 
-  console.log(location.pathname);
+  console.log(location);
 
   useEffect(()=>{
-    localStorage.setItem("location",location.pathname);
+    if(location.pathname!='/login' && location.pathname!=""){
+      localStorage.setItem("location",location.pathname);
+    }
   },[location]);
 
 
@@ -60,6 +64,11 @@ const Login = () => {
 
   };
 
+  useEffect(()=>{
+    if(isError){
+      alert("you got error please refresh and try again");
+    }
+  },[isError]);
   
   useEffect(()=>{
     console.log(token);
@@ -68,6 +77,9 @@ const Login = () => {
     }
   },[token]);
 
+  if(isLoading){
+    return <h1>Loading...</h1>
+  }
 
   return (
     <Box width="90%" height="90%" boxSizing="border-box" margin="auto">
@@ -76,6 +88,7 @@ const Login = () => {
         minWidth="250px"
         // border="1px solid red"
         margin="auto"
+        marginTop='20px'
       >
         <Image
           margin="auto"

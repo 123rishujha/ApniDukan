@@ -1,0 +1,131 @@
+.mainBox {
+    background-color: #f3f4f6;
+    width: 100%;
+    height: 100%;
+    margin-top: 60px;
+    padding: 30px;
+  }
+  
+  .mainBox .mainStack {
+    /* border: 1px solid green; */
+    justify-content: space-between;
+    gap:5px;
+    /* padding: 10px; */
+  }
+  
+  /* all the Products available leftside */
+  .mainStack .leftProducts {
+    /* border: 1px solid black; */
+    background-color: white;
+    width: 70%;
+    padding: 10px;
+  }
+  
+  /* single products  */
+  .leftProducts .singleCard {
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    min-height: 250px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+    align-items: flex-start;
+    font-weight: 600;
+  }
+  
+  .singleCard .imageAndCheckbox {
+    width: 30%;
+    min-height: 250px;
+    align-items: flex-start;
+    padding: 5px;
+    /* border: 1px solid green; */
+  }
+  
+  .imageAndCheckbox > .imageHolder {
+    width: 100%;
+    min-height: 250px;
+    /* border: 1px solid red; */
+    padding: 5px;
+  }
+  
+  .leftProducts .singleCard .cardImag {
+    width: 100%;
+    min-height: 200px;
+    /* border: 1px solid gold; */
+  }
+  
+  .singleCard .CardDetails {
+    align-items: flex-start;
+    width: 70%;
+    min-height: 250px;
+  }
+  
+  .optionsBox {
+    display: flex;
+    padding: 5px;
+    font-weight: 200;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+      rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    background-color: #eaeded;
+  }
+  
+  .optionsBoxChild {
+    background-color: #eaeded;
+  }
+  
+  .mainStack .checkOUt {
+    /* border: 1px solid yellow; */
+    background-color: white;
+    padding:5px;
+    width: 30%;
+    max-height: 200px;
+  }
+  
+  @media all and (min-width: 480px) and (max-width: 767px) {
+    .mainStack .leftProducts {
+      width: 100%;
+      padding: 0px;
+      font-size: 13px;
+    }
+    .singleCard .CardDetails {
+      width: 50%;
+      min-height: 250px;
+    }
+    .singleCard .imageAndCheckbox {
+      width: 45%;
+      min-height: 250px;
+      align-items: flex-start;
+      padding: 5px;
+    }
+    .mainStack .checkOUt{
+      width: 100%;
+    }
+  }
+  
+  @media all and (max-width: 480px) {
+    .mainStack .leftProducts {
+      width: 100%;
+      padding: 0px;
+      font-size: 13px;
+    }
+    .leftProducts .singleCard {
+      flex-direction: column;
+    }
+    .singleCard .CardDetails {
+      width: 100%;
+      min-height: auto;
+    }
+    .singleCard .imageAndCheckbox {
+      width: 100%;
+      min-height: 250px;
+      align-items: flex-start;
+      padding: 5px;
+    }
+    .mainStack .checkOUt{
+      width: 100%;
+    }
+  }
+  
