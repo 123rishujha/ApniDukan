@@ -1,15 +1,16 @@
 import React ,{useState}from 'react'
 import './Navbar.css'
-import logo from './Apni_dukan_logo.png'
-import {Link} from 'react-router-dom'
+import logo from './Apni_dukan_logo.png';
+import {Link,useNavigate} from 'react-router-dom';
 import { Badge } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { FaShoppingCart } from 'react-icons/fa';
 import { HamburgerIcon } from "@chakra-ui/icons";
-import SideMenuModal from './SideMenuModal'
+import SideMenuModal from './SideMenuModal';
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
   const toggleModal = () => setIsModalOpen(!isModalOpen);
   return (
    <header className='header'>
@@ -20,7 +21,7 @@ const Navbar = () => {
           {isModalOpen && <SideMenuModal onClose={toggleModal} />}
         </div>
         <div className="logonav">
-          <img src={logo} alt='logomissing'/>
+          <img onClick={()=>navigate("/")} src={logo} alt='logomissing'/>
         </div>
         <div className="navinput">
           <input type='text' name='' placeholder='Search Amazon.in'/>
@@ -36,10 +37,10 @@ const Navbar = () => {
   </div>
   
   <div className="navcart">
-  <Badge colorScheme="black.900" w={"60%"} h={"80%"}>
+  <Badge colorScheme="black.900" w={"60%"} h={"80%"} onClick={()=>navigate("/cart")} >
       <FaShoppingCart className='carticon'  style={{ width: "100%", height: "100%" }} />
     </Badge>
-    <p>Cart</p>
+    {/* <p>Cart</p> */}
   </div>
 
 </div>
