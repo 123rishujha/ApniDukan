@@ -11,8 +11,17 @@ const cartRoute = express.Router();
 
 //read -> get all the cart product;
 cartRoute.get("/",async(req,res)=>{
+    const token = req.headers?.authorization?.split(" ")[1];
+    const decoded = jwt.verify(token,"key");
+    console.log(decoded.userId,"from cart get route");
+    console.log(req.query);
+    // console.log("routes",req.headers);
+    let loggedInUser = decoded.userId;
+    let queryObj = {userId:loggedInUser,...req.query};
+    console.log("queryObj",queryObj);
     try{
         const cartItems = await CartModel.find();
+        // console.log('fromCart routes',cartItems)
         res.status(200).send({success:true,data:cartItems});
     }
     catch(err){
@@ -23,6 +32,9 @@ cartRoute.get("/",async(req,res)=>{
 
 //create -> add product to cart;
 cartRoute.post("/add",async(req,res)=>{
+    const token = req.headers?.authorization?.split(" ")[1];
+    const decoded = jwt.verify(token,"key");
+    console.log(decoded.userId,"from cart post route");
     const {_id,title,brand,description,price,discount,inStock,soldBy,imageUrls,rating,features,offers,category,subCategory,userId} = req.body;
     try{
         const cart = new CartModel({title,brand,description,price,discount,inStock,soldBy,imageUrls,rating,features,offers,category,subCategory,productId:_id,qtn:1,userId});
@@ -37,20 +49,27 @@ cartRoute.post("/add",async(req,res)=>{
 
 //update -> update the quantity of product;
 cartRoute.patch('/update/:itemId',async(req,res)=>{
+    // const token = req.headers?.authorization?.split(" ")[1];
+    // const decoded = jwt.verify(token,"key");
+    // console.log(decoded.userId,"from cart patch route");
     const LoggedInUserToken =  req.headers?.authorization?.split(" ")[1]; // passing via headers for authorizatin
     const { itemId } = req.params; // cart item id 
     const {qtn} = req.body; // updated quantity of cartItem
     // console.log(LoggedInUserToken);
     try{
         const decoded = jwt.verify(LoggedInUserToken,"key");
-        // console.log(decoded);
+        // console.log("decoded",decoded);
         const loggedInUser_id = decoded.userId; // we was pasing {userId:_id} as payload during login check userRoute(file) -> /login
         const cartItem = await CartModel.findOne({_id:itemId});
+        console.log("cartItem",cartItem.userId);
+        console.log("from token",loggedInUser_id);
+        // console.log("body",req.body.userId);
+        // loggedInUser_id==cartItem.userId
         if(loggedInUser_id==cartItem.userId){
             const updatedCart = await CartModel.findByIdAndUpdate({_id:itemId},{qtn:qtn},{new: true});
             res.send({success:true,data:updatedCart});
         }else{
-            res.status(400).send({success:false,message:"not authorize, please login first"});
+            res.status(400).send({success:false,message:"not authorize, please login first, from route"});
         }
     }
     catch(err){

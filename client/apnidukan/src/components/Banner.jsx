@@ -8,9 +8,10 @@ import {
 } from '@chakra-ui/react';
 import { ChevronRightIcon ,ChevronLeftIcon} from "@chakra-ui/icons"
 // Here we have used react-icons package for the icons
-import { BiLeftArrowAlt, BiRightArrowAlt, } from 'react-icons/bi';
+
 // And react-slick as our Carousel Lib
 import Slider from 'react-slick';
+
 
 // Settings for the slider
 const settings = {
@@ -32,7 +33,7 @@ export default function Banner() {
 
   // These are the breakpoints which changes the position of the
   // buttons as the screen size changes
-  const top = useBreakpointValue({ base: '25%', md: '50%',lg:'50%' });
+  const top = useBreakpointValue({ base: '50%', md: '50%',lg:'50%' });
   const side = useBreakpointValue({ base: '2%', md: '40px' });
 
   // This list contains all the data for carousels
@@ -56,9 +57,15 @@ export default function Banner() {
   return (
     <Box
       position={'relative'}
-      height={'300px'}
-      width={'full'}
+      height={'auto'}
+      min-width={{md:'100%',lg:'100%',base:'100%'}}
       overflow={'hidden'}
+      marginBottom={'0px'}
+      alignItems={'center'}
+      justifyContent={'center'}
+      // border={'10px solid red'}
+      padding={'0px'}
+      // flexShrink={'0.5'}
    >
       {/* CSS files for react-slick */}
       <link
@@ -104,27 +111,32 @@ export default function Banner() {
         {cards && cards.map((card, index) => (
           
           <Box
-          
+          // border={'10px solid green'}
             key={index}
-            height={"300px"}
+            height={{lg:"300px",md:'200px',base:'150px'}}
             position="relative"
             top='0px'
-            // backgroundPosition="center"
+            // backgroundPosition={{base:"center",md:'none'}}
+            padding='0px'
+            margin='0px'
+            width='100%'
+            backgroundSize= {"100% 100%"}
             backgroundRepeat={{md:"no-repeat",base:'no-repeat'}}
-            backgroundSize={{md:"cover",base:'contain'}}
+            // backgroundSize={{md:"cover",base:'contain'}}
             backgroundImage={`url(${card.image})`}>
             {/* This is the block you need to change, to customize the caption */}
-            <Container size="container.lg" height="100%" position="relative" >
-              <Stack
-             
-                spacing={6}
+            {/* <Container size="container.lg"  position="relative" > */}
+              {/* <Stack
+              height="150px"
+             border={'10px solid blue'}
+                // spacing={6}
                 w={'full'}
                 maxW={'lg'}
                 position="absolute"
                 top="50%"
                 transform="translate(0, -50%)">
-              </Stack>
-            </Container>
+              </Stack> */}
+            {/* </Container> */}
           </Box>
         ))}
       </Slider>
