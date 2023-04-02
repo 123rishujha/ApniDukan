@@ -20,7 +20,11 @@ const getProductErrorObj = () => {
 export const getProducts =  (obj) => (dispatch) => {
   dispatch(getProductRequestObj());
   axios
-    .get("http://localhost:8080/products",obj)
+    .get("http://localhost:8080/products", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
+      },
+    })
     .then((res) => {
       dispatch(getProductSuccessObj(res.data));
       console.log(res.data)
