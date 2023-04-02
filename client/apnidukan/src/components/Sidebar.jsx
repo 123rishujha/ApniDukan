@@ -65,7 +65,7 @@ const Sidebar = () => {
 
     setSearchParams(param);
   }, [subCategory, sort,category]);
-
+console.log("filters",)
   return (
     <div className={styles.sidebar}>
         <div>
@@ -82,7 +82,7 @@ const Sidebar = () => {
 
           <br />
           <Checkbox
-            value={"fitness"}
+            value="fitness"
             onChange={(e) => handleCategory(e)}
             defaultChecked={category.includes("fitness")}
             colorScheme="green"

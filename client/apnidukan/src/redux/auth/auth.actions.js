@@ -41,8 +41,10 @@ export const loginSuccess = (payload) => async (dispatch) => {
   dispatch(authRequest());
   try {
     console.log("called", payload);
+    console.log("action",payload);
     // const res = await axios.post(`http://localhost:8080/user/login`, payload);
     const res = await axios.post("http://localhost:8080/user/login",payload);
+    console.log("res action",res);
     const token = res.data.token
     if (res.data.success) {
       console.log("loginSuccess", res);
@@ -50,11 +52,12 @@ export const loginSuccess = (payload) => async (dispatch) => {
       dispatch(authSuccess(res.data.token));
       alert("Login successful");
     } else {
+      console.log(res.data.message);
       dispatch(authError());
       // alert("you got error");
     }
   } catch (err) {
-    console.log("login error", err);
+    console.log("login error from action", err);
     dispatch(authError());
   }
 };

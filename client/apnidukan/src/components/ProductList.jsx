@@ -26,14 +26,15 @@ const ProductList = () => {
   const currentPost = products.slice(firstPostIndex, lastPostIndex);
 
   let obj = {
-    params: {
+    
       category: searchParams.getAll("category"),
       subCategory: searchParams.getAll("subCategory"),
       sort: searchParams.get("sort") && "price",
       sort: searchParams.get("sort"),
-    },
+    
   };
-
+ 
+  console.log(obj)
   function handlePageChange(action) {
     if (action === "prev" && currentPage > 1) {
       setCurrentPage(currentPage - 1);
@@ -46,6 +47,8 @@ const ProductList = () => {
   }
 
   useEffect(() => {
+    // console.log("useeffect",obj.params);
+    // const queries = obj.params
     dispatch(getProducts(obj));
   }, [location.search]);
 
