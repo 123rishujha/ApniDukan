@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
-//schema for cart
-const cartSchema = mongoose.Schema({
+//schema for order
+const orderSchema = mongoose.Schema({
     title: {type: String, required: true},
     brand: {type: String, required: true},
     description: {type: String, required: true},
-    price: {type: Number, required: true}, //M.R.P
+    DealPrice: {type: Number, required: true}, //M.R.P
     discount: {type: Number, required: true}, // if 0% means deal pirce -> price-(0*price)/100; (:- frontend work)
     inStock: {type: Boolean, required: true}, 
     soldBy: {type: String, required: true},
@@ -21,17 +21,25 @@ const cartSchema = mongoose.Schema({
     subCategory: {type: String, required: true}, // if category is electronics you subCategory could be mobile/watch/audio/
     productId: {type: String, required: true},
     qtn: {type: Number,required: true},
-    userId: {type: String, required: true}
+    userId: {type: String, required: true},
+    userDetails:{
+        type: Object,
+        required: true,
+        name:{type: String,required: true},
+        contact:{type: Number,required: true},
+        pincode:{type: Number,required: true},
+        address:{type: String,required: true},
+    }
 },
 {versionKey:false}
 );
 
 
-//template/model for creating products
-const CartModel = mongoose.model("cart",cartSchema);
+//template/model for creating order
+const OrderModel = mongoose.model("order",orderSchema);
 
 
 module.exports = {
-    CartModel
+    OrderModel
 };
 
