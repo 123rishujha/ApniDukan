@@ -43,12 +43,15 @@ userRoute.post("/login",async(req,res)=>{
     const {email,password} = req.body;
     try{
         const findUser = await UserModel.findOne({email});
+        // console.log(findUser.ObjectId._id,"objet");
+        
         if(findUser){
 
             bcrypt.compare(password,findUser.password,(err,result)=>{
 
                if(result){
-                const token = jwt.sign({"userId":findUser._id},"key",{ expiresIn: '1h' });
+                const token = jwt.sign({"userId":findUser._id},"key"); //,{ expiresIn: '1h' }
+                // console.log("login",findUser._id);
                 // console.log(token);
                 // req.session.token=token
                 res.status(200).send({success:true,message:'login successfull',token:token})

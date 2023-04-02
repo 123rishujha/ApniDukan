@@ -5,6 +5,7 @@
     background: #131921;
     position: fixed;
     top:0;
+    z-index: 100;
     
 }
 .nav{ background: #131921;
