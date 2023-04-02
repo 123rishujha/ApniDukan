@@ -88,6 +88,7 @@ const Login = () => {
         minWidth="250px"
         // border="1px solid red"
         margin="auto"
+        marginTop='20px'
       >
         <Image
           margin="auto"

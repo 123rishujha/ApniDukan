@@ -1,4 +1,5 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
 
 //import/requiring files below
 const { ProductModel } = require("../models/product.model"); // Product model/template

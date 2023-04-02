@@ -1,0 +1,6 @@
+.slide_part{
+    margin-left:  0px 15px 0 px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding:0px 20px 0px 20px;
+   z-index: -100;
+}
