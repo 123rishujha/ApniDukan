@@ -46,6 +46,7 @@ export const loginSuccess = (payload) => async (dispatch) => {
     const token = res.data.token
     if (res.data.success) {
       console.log("loginSuccess", res);
+      console.log(token,"localstorage");
       localStorage.setItem("apnidukan",token);
       dispatch(authSuccess(res.data.token));
       alert("Login successful");
