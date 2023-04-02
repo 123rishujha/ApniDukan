@@ -19,7 +19,7 @@ export const getCart = async () => {
       return res;
       }
     catch(err){
-
+      return err
     }
 };
 
