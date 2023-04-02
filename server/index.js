@@ -9,6 +9,7 @@ const { connection } = require('./connection');
 const { productRoute } = require("./routes/product.route");
 const { userRoute } = require("./routes/user.route");
 const { cartRoute } = require("./routes/cart.route");
+const { orderRoute } = require("./routes/order.route");
 //middleware to authorize user
 const { authorise } = require("./middlewares/authenticationeMiddleware");
 
@@ -31,6 +32,8 @@ app.use("/user",userRoute);
 app.use(authorise);
 app.use("/products",productRoute);
 app.use("/cart",cartRoute);
+app.use("/order",orderRoute);
+
 
 
 

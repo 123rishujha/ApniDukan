@@ -15,12 +15,24 @@ cartRoute.get("/",async(req,res)=>{
     const decoded = jwt.verify(token,"key");
     console.log(decoded.userId,"from cart get route");
     console.log(req.query);
+    const _id = req.query._id;
     // console.log("routes",req.headers);
+    // userId:loggedInUser,...req.query
     let loggedInUser = decoded.userId;
-    let queryObj = {userId:loggedInUser,...req.query};
+    let queryObj = {};
+    if(_id==undefined){
+        queryObj = {userId:loggedInUser};    
+    }else if(typeof(_id)==="string"){
+        queryObj = {_id: _id, userId:loggedInUser};
+    }else{
+        if(_id.length>0){
+            queryObj = {_id: {$in:_id},userId:loggedInUser};
+        }
+    }
+    // let queryObj = {_id: {$in:_id},userId:loggedInUser};
     console.log("queryObj",queryObj);
     try{
-        const cartItems = await CartModel.find();
+        const cartItems = await CartModel.find(queryObj);
         // console.log('fromCart routes',cartItems)
         res.status(200).send({success:true,data:cartItems});
     }
