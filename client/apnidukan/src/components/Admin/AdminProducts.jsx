@@ -39,7 +39,12 @@ const AdminProducts = () => {
 
   const getPrice = (id) => {
     axios
-      .get(`http://localhost:8080/admin/${id}`)
+      .get(`http://localhost:8080/products/${id}`, {
+        headers: {
+          Authorization : `Bearer ${localStorage.getItem("apnidukan")}`
+        }
+       
+      })
       .then((res) => {
         //console.log(res.data, res.data.price);
         setEditPrice(res.data.price);
@@ -53,7 +58,10 @@ const AdminProducts = () => {
   const getData = () => {
     axios
       .get("http://localhost:8080/products/", {
-        "Authorization" : `Bearer ${localStorage.getItem("apnidukan")}`
+        headers: {
+          Authorization : `Bearer ${localStorage.getItem("apnidukan")}`
+        }
+       
       })
       .then((res) => {
         console.log(res.data, "line 57");
@@ -67,9 +75,9 @@ const AdminProducts = () => {
   const handleEditAdmin = (id) => {
     //console.log("inside handleAdmin")
     axios
-      .patch(`http://localhost:8080/admin/${id}`, { price: +editPrice })
+      .patch(`http://localhost:8080/products/${id}`, { price: +editPrice })
       .then((res) => {
-        //console.log(res)
+        console.log(res)
         getData();
       })
       .catch((err) => console.log(err));
@@ -80,7 +88,12 @@ const AdminProducts = () => {
 
   // HANDLE DELETE FUNCTIONALITY
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:8080/admin/${id}`).then((res) => {
+    axios.delete(`http://localhost:8080/products/${id}`, {
+      headers: {
+        Authorization : `Bearer ${localStorage.getItem("apnidukan")}`
+      }
+     
+    }).then((res) => {
       getData();
     });
   };
@@ -88,7 +101,12 @@ const AdminProducts = () => {
   // HANDLING THE FILTERING PART
   const handleFilter = (filter) => {
     axios
-      .get(`http://localhost:8080/admin`)
+      .get(`http://localhost:8080/products`, {
+        headers: {
+          Authorization : `Bearer ${localStorage.getItem("apnidukan")}`
+        }
+       
+      })
       .then((res) => {
         //console.log(res.data)
         let data = res.data;
@@ -144,7 +162,12 @@ const AdminProducts = () => {
   // HANDLING THE SORTING PART
   const handleSort = (order) => {
     axios
-      .get(`http://localhost:8080/product`)
+      .get(`http://localhost:8080/product`, {
+        headers: {
+          Authorization : `Bearer ${localStorage.getItem("apnidukan")}`
+        }
+       
+      })
       .then((res) => {
         //console.log(res.data)
         let data = res.data;
@@ -172,7 +195,7 @@ const AdminProducts = () => {
 
 
   return (
-    <div style={{ backgroundColor: "#cec6c6", minHeight: "1000px" }}>
+    <div style={{ backgroundColor: "#cec6c6", minHeight: "500px", width: "100%" }}>
       <AdminNavbar/>
       
 
@@ -281,6 +304,8 @@ const AdminProducts = () => {
           style={{
             width: "80%",
             margin: "auto",
+            display: "flex",
+            flexWrap: "wrap",
             border: "1px solid black",
             marginTop: "20px",
             marginBottom: "20px",
@@ -321,10 +346,10 @@ const AdminProducts = () => {
                 </Tr>
               </Thead>
               <Tbody>
-                {data?.map((el) => {
+                {data?.map((el,i) => {
                   return (
-                    <Tr key={el.id}>
-                      <Td>{el.id}</Td>
+                    <Tr key={el._id}>
+                      <Td>{i+1}</Td>
                       <Td>{el.category}</Td>
                       <Td
                         style={{
@@ -332,12 +357,12 @@ const AdminProducts = () => {
                           alignItems: "center",
                           gap: "5px",
                         }}>
-                        <img
+                        {/* <img
                           style={{ width: "100px", height: "100px" }}
-                          src={el.image}
+                          src={el.imageURLs[1]}
                           alt={el.id}
-                        />
-                        <p>{el.title}</p>
+                        /> */}
+                        <p>{el.title.substr(0,30)}</p>
                       </Td>
                       <Td>{el.brand}</Td>
                       <Td>{el.price}</Td>
@@ -346,8 +371,8 @@ const AdminProducts = () => {
                           bg={"white"}
                           onClick={(e) => {
                             onOpen();
-                            setSaveId(el.id);
-                            getPrice(el.id);
+                            setSaveId(el._id);
+                            getPrice(el._id);
                           }}>
                           <EditIcon />
                           <Modal isOpen={isOpen} onClose={onClose}>
@@ -392,7 +417,7 @@ const AdminProducts = () => {
                           bg={"white"}
                           onClick={() => {
                             //console.log(el.id)
-                            handleDelete(el.id);
+                            handleDelete(el._id);
                           }}>
                           <DeleteIcon />
                         </Button>
@@ -412,7 +437,7 @@ const AdminProducts = () => {
             marginTop: "70px",
             paddingBottom: "25px",
           }}>
-          Copyright © 1995-2023 eBuzz Inc. All Rights Reserved. Accessibility,
+          Copyright © 2023 Apni Dukan Inc. All Rights Reserved. Accessibility,
           User Agreement, Privacy, Payments Terms of Use, Cookies, Your Privacy
           Choices and AdChoice
         </div>

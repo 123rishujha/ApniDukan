@@ -29,7 +29,7 @@ const AdminNavbar = () => {
   };
 
   return (
-    <div className="nav_main">
+    <div className="nav_main" style={{marginTop: "50px"}}>
       <div className="nav_logo" onClick={logoClicked}>
         <img src="https://www.linkpicture.com/q/apni_dukan_admin_logo.png" alt="logo" />
       </div>
