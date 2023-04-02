@@ -13,7 +13,7 @@ const AdminNavbar = () => {
   };
 
   const redirect_AdminProducts = () => {
-    navigate("/admin_products");
+    navigate("/adminProducts");
   };
 
   const redirect_AdminHome = () => {
@@ -31,7 +31,7 @@ const AdminNavbar = () => {
   return (
     <div className="nav_main">
       <div className="nav_logo" onClick={logoClicked}>
-        <img src="" alt="logo" />
+        <img src="https://www.linkpicture.com/q/apni_dukan_admin_logo.png" alt="logo" />
       </div>
       <div className="navigate_section">
         <div onClick={redirect_AdminHome} className="navigate_section_home">
