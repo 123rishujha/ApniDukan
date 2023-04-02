@@ -58,8 +58,11 @@ productRoute.post("/add", async (req, res) => {
 
 productRoute.get("/", async (req, res) => {
     console.log("products");
+    const query = req.query
+    const {sort} = req.query
   try {
-    const products = await ProductModel.find();
+    const sortOption =    sort ? { price: sort === 'asc' ? 1 : -1 } : {};
+    const products = await ProductModel.find(query).sort(sortOption);
     res.status(200).send(products);
   } catch (error) {
     res.status(400).send({msg: "Something went wrong! "})

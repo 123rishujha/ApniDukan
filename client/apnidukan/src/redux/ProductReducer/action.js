@@ -17,10 +17,10 @@ const getProductErrorObj = () => {
   return { type: GET_PRODUCT_ERROR };
 };
 
-export const getProducts = (dispatch) => {
+export const getProducts =  (obj) => (dispatch) => {
   dispatch(getProductRequestObj());
   axios
-    .get("http://localhost:8080/products")
+    .get("http://localhost:8080/products",obj)
     .then((res) => {
       dispatch(getProductSuccessObj(res.data));
       console.log(res.data)

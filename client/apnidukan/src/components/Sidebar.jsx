@@ -14,17 +14,19 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Sidebar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const initalOrder = searchParams.get("order");
-  const initialState = searchParams.getAll("rating");
-  const [rating, setRating] = useState(initialState || []);
-  const [order, setOrder] = useState(initalOrder || "");
+  const initalOrder = searchParams.get("sort");
+  const initialState = searchParams.getAll("subCategory");
+  const initialCategory = searchParams.getAll("category");
+  const [subCategory, setsubcategory] = useState(initialState || []);
+  const [category, setcategory] = useState(initialCategory || []);
+  const [sort, setSort] = useState(initalOrder || "");
 
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    let value = e.target.value;
+    let value = ( e.target.value);
 
-    let newCategory = [...rating];
+    let newCategory = [...subCategory];
 
     if (newCategory.includes(value)) {
       newCategory.splice(newCategory.indexOf(value), 1);
@@ -32,22 +34,37 @@ const Sidebar = () => {
       newCategory.push(value);
     }
 
-    setRating(newCategory);
+    setsubcategory(newCategory);
+  };
+
+  const handleCategory = (e) => {
+    let value = ( e.target.value);
+
+    let newCategory = [...category];
+
+    if (newCategory.includes(value)) {
+      newCategory.splice(newCategory.indexOf(value), 1);
+    } else {
+      newCategory.push(value);
+    }
+
+    setcategory(newCategory);
   };
 
   const handleSort = (e) => {
-    setOrder(e.target.value);
+    setSort(e.target.value);
   };
 
   useEffect(() => {
     let param = {
-      rating,
+      subCategory,
+      category
     };
 
-    order && (param.order = order);
+    sort && (param.sort = sort);
 
     setSearchParams(param);
-  }, [rating, order]);
+  }, [subCategory, sort,category]);
 
   return (
     <div className={styles.sidebar}>
@@ -55,9 +72,9 @@ const Sidebar = () => {
         <h5 style={{margin:"15px",fontWeight:"bolder",padding:"10px",fontSize:"25px"}} >Category</h5>
         <div style={{ paddingLeft: "10px" }}>
           <Checkbox
-            value={"1"}
-            onChange={(e) => handleChange(e)}
-            defaultChecked={rating.includes("1")}
+            value={"electronics"}
+            onChange={(e) => handleCategory(e)}
+            defaultChecked={category.includes("electronics")}
             colorScheme="green"
           >
            <label htmlFor="">Electronics</label>
@@ -65,9 +82,9 @@ const Sidebar = () => {
 
           <br />
           <Checkbox
-            value={"2"}
-            onChange={(e) => handleChange(e)}
-            defaultChecked={rating.includes("2")}
+            value={"fitness"}
+            onChange={(e) => handleCategory(e)}
+            defaultChecked={category.includes("fitness")}
             colorScheme="green"
           >
          <label htmlFor="">Fitness</label>
@@ -75,9 +92,9 @@ const Sidebar = () => {
 
           <br />
           <Checkbox
-            value={"3"}
-            onChange={(e) => handleChange(e)}
-            defaultChecked={rating.includes("3")}
+            value={"cloths"}
+            onChange={(e) => handleCategory(e)}
+            defaultChecked={category.includes("cloths")}
             colorScheme="green"
           >
             <label htmlFor="">Cloths</label>
@@ -85,9 +102,9 @@ const Sidebar = () => {
 
           <br />
           <Checkbox
-            value={"4"}
-            onChange={(e) => handleChange(e)}
-            defaultChecked={rating.includes("4")}
+            value={"furniture"}
+            onChange={(e) => handleCategory(e)}
+            defaultChecked={category.includes("furniture")}
             colorScheme="green"
           >
             <label htmlFor="">Furniture</label>
@@ -104,9 +121,9 @@ const Sidebar = () => {
          
           type="radio"
           value="asc"
-          name="order"
+          name="sort"
           onChange={(e) => handleSort(e)}
-          defaultChecked={order === "asc"}
+          defaultChecked={sort === "asc"}
         />
         <label style={{fontSize:"25px",marginLeft:"15px"}}>  Low to High</label>
         <br />
@@ -114,9 +131,9 @@ const Sidebar = () => {
          
           type="radio"
           value="desc"
-          name="order"
+          name="sort"
           onChange={(e) => handleSort(e)}
-          defaultChecked={order === "desc"}
+          defaultChecked={sort === "desc"}
         />
         <label style={{fontSize:"25px",marginLeft:"15px"}}>High to Low</label>
       </div>
@@ -126,68 +143,55 @@ const Sidebar = () => {
       </div>
 
       <div>
-        <h5 style={{margin:"15px",fontWeight:"bolder",padding:"10px",fontSize:"25px"}} >Customer Rating</h5>
+        <h5 style={{margin:"15px",fontWeight:"bolder",padding:"10px",fontSize:"25px"}} >SubCategory</h5>
         <div style={{ paddingLeft: "10px" }}>
           <Checkbox
-            value={"1"}
+            value={"audio"}
             onChange={(e) => handleChange(e)}
-            defaultChecked={rating.includes("1")}
+            defaultChecked={subCategory.includes("audio")}
             colorScheme="green"
           >
-            <label style={{ color: "#ffc315", fontSize: "25px" }}>
-              {"\u2605 \u2606 \u2606 \u2606 \u2606"}
-            </label>
+           Audio
           </Checkbox>
 
           <br />
           <Checkbox
-            value={"2"}
+            value={"Strength Training"}
             onChange={(e) => handleChange(e)}
-            defaultChecked={rating.includes("2")}
+            defaultChecked={subCategory.includes("Strength Training")}
             colorScheme="green"
           >
-            {" "}
-            <label style={{ color: "#ffc315", fontSize: "25px" }}>
-              {" "}
-              {"\u2605 \u2605 \u2606 \u2606 \u2606"}
-            </label>
+            Strength Training
           </Checkbox>
 
           <br />
           <Checkbox
-            value={"3"}
+            value={"laptop"}
             onChange={(e) => handleChange(e)}
-            defaultChecked={rating.includes("3")}
+            defaultChecked={subCategory.includes("laptop")}
             colorScheme="green"
           >
-            <label style={{ color: "#ffc315", fontSize: "25px" }}>
-              {"\u2605 \u2605 \u2605 \u2606 \u2606"}
-            </label>
+            Laptop
           </Checkbox>
 
           <br />
           <Checkbox
-            value={"4"}
+            value={"Gymnastics"}
             onChange={(e) => handleChange(e)}
-            defaultChecked={rating.includes("4")}
+            defaultChecked={subCategory.includes("Gymnastics")}
             colorScheme="green"
           >
-            {" "}
-            <label style={{ color: "#ffc315", fontSize: "25px" }}>
-              {"\u2605 \u2605 \u2605 \u2605 \u2606"}
-            </label>
+           Gymnastics
           </Checkbox>
 
           <br />
           <Checkbox
-            value={"5"}
+            value={"Exercise Machines"}
             onChange={(e) => handleChange(e)}
-            defaultChecked={rating.includes("5")}
+            defaultChecked={subCategory.includes("Exercise Machines")}
             colorScheme="green"
           >
-            <label style={{ color: "#ffc315", fontSize: "25px" }}>
-              {"\u2605 \u2605 \u2605 \u2605 \u2605"}
-            </label>
+            Exercise Machines
           </Checkbox>
 
           <br />
