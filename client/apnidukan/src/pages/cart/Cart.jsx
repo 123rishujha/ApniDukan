@@ -67,7 +67,7 @@ const Cart = () => {
   }, [order,cartData]);
 
  
-
+  // the will calculate the deal price
   const calculateDetail = (price, discount) => {
     let off = Math.round((price * discount) / 100);
     // return off;
@@ -95,10 +95,11 @@ const Cart = () => {
   //move to checkout page;
   const handleCheckOut = () =>{
     const params = {};
-    console.log(order);
-    let query = {_id:order};
+    // console.log(order);
+    let query = {};
     if(order.length>0){
-      params._id = order
+      params._id = order;
+      query._id = order
     }
     navigate({
       pathname:"/checkout",

@@ -8,13 +8,15 @@ import SignUp from '../pages/signup/SignUp';
 import Home from '../pages/Home'
 import Cart from '../pages/cart/Cart';
 import CheckOut from '../pages/checkOut/CheckOut';
+// import ProductDetails from '../pages/productDetails/ProductDetails';
+import ProductDetails from '../pages/productDetails/ProductDetails';
 
 const AllRoutes = () =>{
     return(
         <Routes>
             <Route path='/' element={<Home/>} />
             <Route path='/products' element={<Product/>} />
-            <Route path='/product/:id' element={<h1>productDetails</h1>} />
+            <Route path='/products/:id' element={<ProductDetails />} />
             <Route path='/cart' element={<Cart/>} />
             <Route path='/checkout' element={<CheckOut />} />
 
