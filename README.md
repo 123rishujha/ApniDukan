@@ -20,14 +20,14 @@ About Amazon :-Amazon has become one of the world's largest online retailers and
 
 Deployed Link -> https://apnidukan-ten.vercel.app/
 
-
+1.Home Page
 
 ![Screenshot (70)](https://user-images.githubusercontent.com/112858493/229427145-6ac6b449-ad4a-4345-8869-e5095a1a8353.png)
 
-
+2.Footer
 ![Screenshot (72)](https://user-images.githubusercontent.com/112858493/229427178-4492f25d-846b-4ad7-a844-cf0f8813b20b.png)
 
-
+3. Product Page
 ![Screenshot (74)](https://user-images.githubusercontent.com/112858493/229427209-9d23991a-da31-450b-a361-ff7a2512f331.png)
 
 
