@@ -2,8 +2,6 @@ import React ,{useState}from 'react'
 import './Navbar.css'
 import logo from './Apni_dukan_logo.png'
 import {Link,useNavigate} from 'react-router-dom'
-import logo from './Apni_dukan_logo.png';
-import {Link,useNavigate} from 'react-router-dom';
 import { Badge } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { FaShoppingCart } from 'react-icons/fa';

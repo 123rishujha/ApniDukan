@@ -23,7 +23,7 @@ export const registrationSuccess = () => {
 export const registerUser = (payload) => async (dispatch) => {
   dispatch(authRequest());
   try {
-    const res = await axios.post(`http://localhost:8080/user/register`,payload);
+    const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/user/register`,payload);
     if (res.data.success) {
         console.log(res);
       dispatch(registrationSuccess());
@@ -35,6 +35,7 @@ export const registerUser = (payload) => async (dispatch) => {
     dispatch(authError());
   }
 };
+// ${process.env.REACT_APP_BASE_URL}
 
 //login
 export const loginSuccess = (payload) => async (dispatch) => {
@@ -42,8 +43,8 @@ export const loginSuccess = (payload) => async (dispatch) => {
   try {
     console.log("called", payload);
     console.log("action",payload);
-    // const res = await axios.post(`http://localhost:8080/user/login`, payload);
-    const res = await axios.post("http://localhost:8080/user/login",payload);
+    // const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/user/login`, payload);
+    const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/user/login`,payload);
     console.log("res action",res);
     const token = res.data.token
     if (res.data.success) {

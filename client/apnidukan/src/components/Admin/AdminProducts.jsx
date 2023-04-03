@@ -39,7 +39,7 @@ const AdminProducts = () => {
 
   const getPrice = (id) => {
     axios
-      .get(`http://localhost:8080/products/${id}`, {
+      .get(`${process.env.REACT_APP_BASE_URL}/products/${id}`, {
         headers: {
           Authorization : `Bearer ${localStorage.getItem("apnidukan")}`
         }
@@ -57,7 +57,7 @@ const AdminProducts = () => {
 
   const getData = () => {
     axios
-      .get("http://localhost:8080/products/", {
+      .get(`${process.env.REACT_APP_BASE_URL}/products/`, {
         headers: {
           Authorization : `Bearer ${localStorage.getItem("apnidukan")}`
         }
@@ -69,13 +69,13 @@ const AdminProducts = () => {
       })
       .catch((err) => console.log(err));
   };
-  //axios.patch(`http://localhost:8080/admin/${id}`, )
+  //axios.patch(`${process.env.REACT_APP_BASE_URL}/admin/${id}`, )
 
   // HANDLE EDIT FUNCTIONALITY
   const handleEditAdmin = (id) => {
     //console.log("inside handleAdmin")
     axios
-      .patch(`http://localhost:8080/products/${id}`, { price: +editPrice })
+      .patch(`${process.env.REACT_APP_BASE_URL}/products/${id}`, { price: +editPrice })
       .then((res) => {
         console.log(res)
         getData();
@@ -88,7 +88,7 @@ const AdminProducts = () => {
 
   // HANDLE DELETE FUNCTIONALITY
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:8080/products/${id}`, {
+    axios.delete(`${process.env.REACT_APP_BASE_URL}/products/${id}`, {
       headers: {
         Authorization : `Bearer ${localStorage.getItem("apnidukan")}`
       }
@@ -101,7 +101,7 @@ const AdminProducts = () => {
   // HANDLING THE FILTERING PART
   const handleFilter = (filter) => {
     axios
-      .get(`http://localhost:8080/products`, {
+      .get(`${process.env.REACT_APP_BASE_URL}/products`, {
         headers: {
           Authorization : `Bearer ${localStorage.getItem("apnidukan")}`
         }
@@ -162,7 +162,7 @@ const AdminProducts = () => {
   // HANDLING THE SORTING PART
   const handleSort = (order) => {
     axios
-      .get(`http://localhost:8080/product`, {
+      .get(`${process.env.REACT_APP_BASE_URL}/product`, {
         headers: {
           Authorization : `Bearer ${localStorage.getItem("apnidukan")}`
         }

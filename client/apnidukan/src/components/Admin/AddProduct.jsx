@@ -71,7 +71,7 @@ const AddProducts = () => {
   };
 
   const postData = (data) => {
-    axios.post("http://localhost:8080/products", data, {
+    axios.post(`${process.env.REACT_APP_BASE_URL}/products`, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
       },

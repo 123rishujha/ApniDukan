@@ -89,6 +89,7 @@ const Cart = () => {
 
   const handleDelete = (id) =>{
     console.log(id);
+    console.log("delete called");
     dispatch(deleteCartSuccess(id));
   }
 
@@ -209,7 +210,7 @@ const Cart = () => {
                             <option>3</option>
                           </select>
                         </Box>
-                      <Button size="sm" variant="outline" colorScheme="red">
+                      <Button onClick={()=>handleDelete(elem._id)} size="sm" variant="outline" colorScheme="red">
                         Delete
                       </Button>
                     </HStack>
