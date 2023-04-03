@@ -11,13 +11,16 @@ import {
   import { authReducer } from "./auth/auth.reducer";
   import { cartReducer } from "./cart/cart.reducer";
   import { checkoutReducer } from './checkout/checkout.reducer';
+  import { orderReducer } from './order/order.reducer';
+  
   
   //add all the reducers here
   const rootReducer = combineReducers({
     ProductReducer,
     authReducer,
     cartReducer,
-    checkoutReducer
+    checkoutReducer,
+    orderReducer
   });
   
   const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

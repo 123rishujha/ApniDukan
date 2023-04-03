@@ -53,23 +53,23 @@ const AdminNavbar = () => {
       <div className="nav_drop_down_section">
         <Menu>
           <div className="dropbtn_text">
-            <MenuButton  backgroundColor={"#092546"}>Settings</MenuButton>
+            <MenuButton style={{color:"white", fontWeight: "bold" }}>Settings</MenuButton>
           </div>
           <MenuList marginTop={"15px"} border={"1px solid black"}>
             <MenuItem>
-              <b>Profile</b>
+              <b style={{color:"black"}}>Profile</b>
               <Box marginLeft={3}></Box>
             </MenuItem>
             <MenuItem>
-              <b>Order History</b>
+              <b style={{color:"black"}}>Order History</b>
               <Box marginLeft={3}></Box>
             </MenuItem>
             <MenuItem>
-              <b>Help & Contact</b>
+              <b style={{color:"black"}}>Help & Contact</b>
               <Box marginLeft={3}></Box>
             </MenuItem>
             <MenuItem onClick={handleSignOut}>
-              <b>Sign Out</b>
+              <b style={{color:"black"}}>Sign Out</b>
               <Box marginLeft={3}></Box>
             </MenuItem>
           </MenuList>

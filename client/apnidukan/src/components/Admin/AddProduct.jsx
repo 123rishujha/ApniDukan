@@ -15,10 +15,15 @@ const AddProducts = () => {
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
   const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
   const [brand, setBrand] = useState("");
-  const [strikePrice, setStrikePrice] = useState("");
   const [price, setPrice] = useState("");
+  const [discount, setDiscount] = useState("");
+  const [image, setImage] = useState("");
+  const [soldBy, setSoldBy] = useState("");
+  const [inStock, setInStock] = useState(true);
+  const [rating, setRatings] = useState({});
+  const [features, setFeatures] = useState("");
+
   const [description, setDescription] = useState("");
 
   const handleSubmitForm = (e) => {
@@ -28,27 +33,49 @@ const AddProducts = () => {
       category,
       subCategory,
       title,
-      image,
+      discount: +discount,
+      imageUrls: image.split(" "),
       brand,
       price: +price,
       description,
+      soldBy,
+      inStock,
+      rating: {
+        rating: Math.floor(Math.random() * 5) + 1,
+        count: Math.floor(Math.random() * 50) + 5,
+      },
+      features: features.split(" "),
+      offers: [
+        "EMI on debit cards is currently available for select customers of following banks:HDFC, ICICI, Axis, Kotak Mahindra and Federal Bank on products above Rs.5,000. To know more about Debit EMI eligibility and how it works",
+        "10% Instant Discount up to INR 500 on IDBI Bank Card Trxns. Min purchase value INR 2000",
+        "5% Instant Discount up to INR 250 on HSBC Cashback Card Credit Card Transactions. Minimum purchase value INR 1000",
+        "Saving up to 28% off with GST input credit",
+      ],
     };
 
     console.log(formData);
-    postData(formData);
+    postData("formdata",formData);
 
     setCategory("");
     setSubCategory("");
     setTitle("");
     setImage("");
+    setDiscount(0);
     setBrand("");
-    setStrikePrice("");
     setPrice("");
     setDescription("");
+    setInStock(true);
+    setSoldBy("");
+    setFeatures([]);
+    setRatings({});
   };
 
   const postData = (data) => {
-    axios.post("", data);
+    axios.post("http://localhost:8080/products", data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
+      },
+    }).then((res) => {console.log(res); res.json(); console.log(res);});
   };
 
   return (
@@ -84,11 +111,10 @@ const AddProducts = () => {
                   value={category}
                   onChange={(e) => setCategory(e.currentTarget.value)}
                   placeholder="Select Category">
-                  <option value="cloths">Cloths</option>
-                  <option value="fitness">Fitness</option>
                   <option value="furniture">Furniture</option>
+                  <option value="fitness">Fitness</option>
                   <option value="electronics">Electronics</option>
-                  {/* <option value="grocery">Grocery</option> */}
+                  <option value="cloths">Cloths</option>
                 </Select>
               </div>
 
@@ -109,39 +135,35 @@ const AddProducts = () => {
                     value={subCategory}
                     onChange={(e) => setSubCategory(e.currentTarget.value)}
                     placeholder="Select sub-category">
-                    <option value="shirt">fitttt</option>
-                    <option value="t-shirt">fitttt</option>
-                    <option value="hoodie">fittttrrr</option>
-                    <option value="pant">fittttsss</option>
-                    <option value="watch">fittttttt</option>
-                    <option value="Wooden chair">fitttt Chair</option>
-                    <option value="USB cable">USB fitttt</option>
+                    <option value="Strength Training">Strength Training</option>
+                    <option value="Exercise Machines">Exercise Machines</option>
                   </Select>
                 ) : category === "furniture" ? (
                   <Select
                     value={subCategory}
                     onChange={(e) => setSubCategory(e.currentTarget.value)}
                     placeholder="Select sub-category">
-                    <option value="shirt">Bed</option>
-                    <option value="t-shirt">Sofa</option>
-                    <option value="hoodie">Chair</option>
-                    <option value="pant">Bookshelf</option>
-                    <option value="watch">Dining table</option>
+                    <option value="bed">Bed</option>
+                    <option value="sofa">Sofa</option>
+                    <option value="chair">Chair</option>
+                    <option value="dining table">Dining table</option>
+                    <option value="bookshelf">Bookshelf</option>
                   </Select>
                 ) : category === "electronics" ? (
                   <Select
                     value={subCategory}
                     onChange={(e) => setSubCategory(e.currentTarget.value)}
                     placeholder="Select sub-category">
-                    <option value="shirt">Ac</option>
-                    <option value="t-shirt">smart TV</option>
-                    <option value="hoodie">Radio</option>
-                    <option value="pant">laptop</option>
-                    <option value="watch">mobiles</option>
-                    <option value="Wooden chair">tablets</option>
+                    <option value="audio">Audio</option>
+                    <option value="laptop">Laptop</option>
+                    <option value="smart TV">smart TV</option>
+                    <option value="Personal computer">Personal computer</option>
+                    <option value="Air conditioner">Air conditioner</option>
                   </Select>
                 ) : (
-                  <Select ><option value="">Please select Category</option></Select>
+                  <Select>
+                    <option value="">Please select Category</option>
+                  </Select>
                 )}
               </div>
 
@@ -159,7 +181,7 @@ const AddProducts = () => {
                   value={image}
                   onChange={(e) => setImage(e.currentTarget.value)}
                   type="text"
-                  placeholder="Image URL"
+                  placeholder="Image URLs"
                 />
               </div>
               <div style={{ marginBottom: "20px" }}>
@@ -171,7 +193,7 @@ const AddProducts = () => {
                   placeholder="Brand"
                 />
               </div>
-              <div style={{ marginBottom: "20px" }}>
+              {/* <div style={{ marginBottom: "20px" }}>
                 <FormLabel>strike price</FormLabel>
                 <Input
                   value={strikePrice}
@@ -179,7 +201,7 @@ const AddProducts = () => {
                   type="number"
                   placeholder="strike price"
                 />
-              </div>
+              </div> */}
               <div style={{ marginBottom: "20px" }}>
                 <FormLabel>Price</FormLabel>
                 <Input
@@ -190,12 +212,39 @@ const AddProducts = () => {
                 />
               </div>
               <div style={{ marginBottom: "20px" }}>
+                <FormLabel>Discount</FormLabel>
+                <Input
+                  value={discount}
+                  onChange={(e) => setDiscount(e.currentTarget.value)}
+                  type="number"
+                  placeholder="Discount (%)"
+                />
+              </div>
+              <div style={{ marginBottom: "20px" }}>
                 <FormLabel>Description</FormLabel>
                 <Input
                   value={description}
                   onChange={(e) => setDescription(e.currentTarget.value)}
                   type="text"
                   placeholder="Description"
+                />
+              </div>
+              <div style={{ marginBottom: "20px" }}>
+                <FormLabel>Sold By</FormLabel>
+                <Input
+                  value={soldBy}
+                  onChange={(e) => setSoldBy(e.currentTarget.value)}
+                  type="text"
+                  placeholder="soldBy"
+                />
+              </div>
+              <div style={{ marginBottom: "20px" }}>
+                <FormLabel>Features</FormLabel>
+                <Input
+                  value={features}
+                  onChange={(e) => setFeatures(e.currentTarget.value)}
+                  type="text"
+                  placeholder="Key Features"
                 />
               </div>
               <div style={{ textAlign: "center", marginTop: "40px" }}>
