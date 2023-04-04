@@ -10,6 +10,7 @@ const { productRoute } = require("./routes/product.route");
 const { userRoute } = require("./routes/user.route");
 const { cartRoute } = require("./routes/cart.route");
 const { orderRoute } = require("./routes/order.route");
+const { adminRoute} = require("./routes/admin.route")
 //middleware to authorize user
 const { authorise } = require("./middlewares/authenticationeMiddleware");
 
@@ -19,7 +20,7 @@ const app = express();
 
 //starting below
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 //configaring session middlware
 // app.use(session({
 //     secret:"key",
@@ -29,10 +30,12 @@ app.use(cors())
 // }));
 
 app.use("/user",userRoute);
+app.use("/admin", adminRoute);
 app.use(authorise);
 app.use("/products",productRoute);
 app.use("/cart",cartRoute);
 app.use("/order",orderRoute);
+
 
 
 
