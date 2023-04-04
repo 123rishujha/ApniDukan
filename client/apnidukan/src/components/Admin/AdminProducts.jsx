@@ -72,7 +72,7 @@ const AdminProducts = () => {
 
   const getPrice = (id) => {
     axios
-      .get(`http://localhost:8080/products/${id}`, {
+      .get(`${process.env.REACT_APP_BASE_URL}/products/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
         },
@@ -87,7 +87,7 @@ const AdminProducts = () => {
   const getData = () => {
     setIsLoading(true);
     axios
-      .get("http://localhost:8080/products/", {
+      .get(`${process.env.REACT_APP_BASE_URL}/products/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
         },
@@ -102,22 +102,14 @@ const AdminProducts = () => {
         console.log(err);
       });
   };
-  //axios.patch(`http://localhost:8080/admin/${id}`, )
+  //axios.patch(`${process.env.REACT_APP_BASE_URL}/admin/${id}`, )
 
   // HANDLE EDIT FUNCTIONALITY
   const handleEditAdmin = (id) => {
     //console.log("inside handleAdmin")
     setIsLoading(true);
     axios
-      .patch(
-        `http://localhost:8080/products/${id}`,
-        { price: +editPrice },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
-          },
-        }
-      )
+      .patch(`${process.env.REACT_APP_BASE_URL}/products/${id}`, { price: +editPrice })
       .then((res) => {
         console.log(res);
         setIsLoading(false);
@@ -133,7 +125,7 @@ const AdminProducts = () => {
   const handleDelete = (id) => {
     setIsLoading(true);
     axios
-      .delete(`http://localhost:8080/products/${id}`, {
+      .delete(`${process.env.REACT_APP_BASE_URL}/products/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
         },
@@ -149,7 +141,7 @@ const AdminProducts = () => {
     setFilter(filter);
     setIsLoading(true);
     axios
-      .get(`http://localhost:8080/products`, {
+      .get(`${process.env.REACT_APP_BASE_URL}/products`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
         },
@@ -191,7 +183,7 @@ const AdminProducts = () => {
   const handleSort = (order) => {
     setIsLoading(true);
     axios
-      .get(`http://localhost:8080/products`, {
+      .get(`${process.env.REACT_APP_BASE_URL}/product`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
         },

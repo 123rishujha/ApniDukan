@@ -67,7 +67,7 @@ const Cart = () => {
   }, [order,cartData]);
 
  
-
+  // the will calculate the deal price
   const calculateDetail = (price, discount) => {
     let off = Math.round((price * discount) / 100);
     // return off;
@@ -89,16 +89,18 @@ const Cart = () => {
 
   const handleDelete = (id) =>{
     console.log(id);
+    console.log("delete called");
     dispatch(deleteCartSuccess(id));
   }
 
   //move to checkout page;
   const handleCheckOut = () =>{
     const params = {};
-    console.log(order);
-    let query = {_id:order};
+    // console.log(order);
+    let query = {};
     if(order.length>0){
-      params._id = order
+      params._id = order;
+      query._id = order
     }
     navigate({
       pathname:"/checkout",
@@ -208,7 +210,7 @@ const Cart = () => {
                             <option>3</option>
                           </select>
                         </Box>
-                      <Button size="sm" variant="outline" colorScheme="red">
+                      <Button onClick={()=>handleDelete(elem._id)} size="sm" variant="outline" colorScheme="red">
                         Delete
                       </Button>
                     </HStack>

@@ -10,6 +10,7 @@ const initalState = {
   isError: false,
 };
 
+
 export const reducer = (state = initalState, { type, payload }) => {
   switch (type) {
     case GET_PRODUCT_REQUEST:

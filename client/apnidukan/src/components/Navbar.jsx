@@ -1,7 +1,7 @@
 import React ,{useState}from 'react'
 import './Navbar.css'
-import logo from './Apni_dukan_logo.png';
-import {Link,useNavigate} from 'react-router-dom';
+import logo from './Apni_dukan_logo.png'
+import {Link,useNavigate} from 'react-router-dom'
 import { Badge } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -10,8 +10,8 @@ import SideMenuModal from './SideMenuModal';
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
   const toggleModal = () => setIsModalOpen(!isModalOpen);
+  const navigate = useNavigate();
   return (
    <header className='header'>
     <nav className='nav'>
