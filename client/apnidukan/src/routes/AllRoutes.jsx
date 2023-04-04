@@ -8,6 +8,8 @@ import SignUp from '../pages/signup/SignUp';
 import Home from '../pages/Home'
 import Cart from '../pages/cart/Cart';
 import CheckOut from '../pages/checkOut/CheckOut';
+import AdminLogin from '../pages/adminLogin/AdminLogin';
+import AdminSignup from '../pages/adminSignup/AdminSignup';
 
 const AllRoutes = () =>{
     return(
@@ -26,6 +28,9 @@ const AllRoutes = () =>{
 
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
+
+            <Route path='/adminLogin' element={<AdminLogin />} ></Route>
+            <Route path='/adminSignup' element={<AdminSignup />}></Route>
             
         </Routes>
     )

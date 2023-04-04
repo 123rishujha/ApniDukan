@@ -16,9 +16,10 @@ import logo from "../../assets/logo.png";
 
 // redux functions
 import { useSelector, useDispatch } from "react-redux";
-import { loginSuccess } from "../../redux/auth/auth.actions";
+import {  loginSuccessAdmin } from "../../redux/auth/auth.actions";
 
-const Login = () => {
+const AdminLogin = () => {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Login = () => {
   console.log(location);
 
   useEffect(()=>{
-    if(location.pathname!='/login' && location.pathname!=""){
+    if(location.pathname!='/adminLogin' && location.pathname!=""){
       localStorage.setItem("location",location.pathname);
     }
   },[location]);
@@ -44,13 +45,13 @@ const Login = () => {
       const payload = { email, password };
       console.log("login", payload);
       try{
-        dispatch(loginSuccess(payload));
+        dispatch(loginSuccessAdmin(payload));
         console.log(location);
         console.log(token);
-        navigate(localStorage.getItem("location") || "/");
+        navigate(localStorage.getItem("location") || "");
       }
       catch(err){
-        alert("you got erro");
+        alert("you got some error");
         console.log(err);
       }
     }
@@ -73,7 +74,7 @@ const Login = () => {
   useEffect(()=>{
     console.log(token);
     if(token){
-        return navigate("/");
+        return navigate("/admin");
     }
   },[token]);
 
@@ -82,7 +83,11 @@ const Login = () => {
   }
 
   return (
-    <Box width="90%" height="90%" boxSizing="border-box" margin="auto">
+    <div style={{marginTop: "20px", marginBottom: "20px"}}>
+        <div>Signup as an Admin? <button style={{color: "blue"}} onClick={() => navigate("/adminSignup")}>Click here!</button></div>
+      
+
+        <Box width="90%" height="90%" boxSizing="border-box" margin="auto">
       
       <VStack
         maxWidth="300px"
@@ -100,7 +105,7 @@ const Login = () => {
           width="150px"
           alt="Logo"
         />
-        <div>Admin ? <button style={{color: "blue"}} onClick={() => navigate("/adminLogin")}>Click Here!</button></div>
+        <div style={{textAlign: "center"}}>Create New Admin Account? <button style={{color: "blue"}} onClick={() => navigate("/adminSignup")}>Click Here!</button></div>
         <Box
           width="100%"
           margin="auto"
@@ -108,7 +113,7 @@ const Login = () => {
           padding="20px"
           boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
         >
-          <Heading margin="auto">Sign in</Heading>
+          <Heading textAlign={"center"}>Sign in</Heading>
           <VStack padding="10px" width="100%">
             <Input
               type="email"
@@ -136,7 +141,7 @@ const Login = () => {
               Sign In
             </Button>
             <Text>
-              By continuing, you agree to Amazon's{" "}
+              By continuing, you agree to Apni Dukan's{" "}
               <Link style={{ color: "blue" }}>Conditions of Use</Link> and{" "}
               <Link style={{ color: "blue" }}>Privacy Notice</Link>.
             </Text>
@@ -153,12 +158,12 @@ const Login = () => {
           fontWeight="200"
           onClick={() => navigate("/signup")}
         >
-          create your amazon account
+          create your user account
         </Button>
       </VStack>
     </Box>
-  );
+    </div>
+  )
+}
 
-};
-
-export default Login;
+export default AdminLogin
