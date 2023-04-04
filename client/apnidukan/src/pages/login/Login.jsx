@@ -58,7 +58,7 @@ const Login = () => {
     // const payload = { email, password };
     // console.log(payload);
     // axios
-    //   .post("http://localhost:8080/user/login", payload)
+    //   .post("${process.env.REACT_APP_BASE_URL}/user/login", payload)
     //   .then((res) => console.log(res))
     //   .catch((err) => console.log(err));
 

@@ -3,13 +3,13 @@ import axios from "axios";
 //get cart products;
 export const getCart = async () => {
   // return axios
-  //   .get("http://localhost:8080/cart/", {
+  //   .get("${process.env.REACT_APP_BASE_URL}/cart/", {
   //     headers: {
   //       Authorization: localStorage.getItem("apnidukan"),
   //     },
   //   })
     try{
-      const res = await axios.get("http://localhost:8080/cart/", {
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/cart/`, {
                         headers: {
                           Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
                         },
@@ -26,7 +26,7 @@ export const getCart = async () => {
 //post  cart item
 export const postCart = (payload) => {
  return axios
-    .post("http://localhost:8080/cart/add", payload, {
+    .post(`${process.env.REACT_APP_BASE_URL}/cart/add`, payload, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
       },
@@ -39,7 +39,7 @@ export const postCart = (payload) => {
 export const updateCart = (id, payload) => {
   console.log("called");
  return axios
-    .patch(`http://localhost:8080/cart/update/${id}`, payload, { //payload-> {qtn:value}
+    .patch(`${process.env.REACT_APP_BASE_URL}/cart/update/${id}`, payload, { //payload-> {qtn:value}
       headers: {
         Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
       },
@@ -51,7 +51,7 @@ export const updateCart = (id, payload) => {
 // delete cart item
 export const deleteCart = (id) => {
  return axios
-    .delete(`http://localhost:8080/cart/delete/${id}`, {
+    .delete(`${process.env.REACT_APP_BASE_URL}/cart/delete/${id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
       },

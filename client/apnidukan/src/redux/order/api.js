@@ -3,13 +3,13 @@ import axios from "axios";
 //get cart products;
 export const getOrder = async () => {
   // return axios
-  //   .get("http://localhost:8080/cart/", {
+  //   .get("${process.env.REACT_APP_BASE_URL}/cart/", {
   //     headers: {
   //       Authorization: localStorage.getItem("token"),
   //     },
   //   })
     try{
-      const res = await axios.get("http://localhost:8080/order/", {
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/order/`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
           },
@@ -24,7 +24,7 @@ export const getOrder = async () => {
 };
 
 export const postOrder = async (payload) =>{
-  return axios.post("http://localhost:8080/order/add",payload,{
+  return axios.post(`${process.env.REACT_APP_BASE_URL}/order/add`,payload,{
     headers: {
       Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
     }

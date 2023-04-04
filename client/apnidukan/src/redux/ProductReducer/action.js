@@ -22,8 +22,9 @@ export const getProducts = (obj) => async (dispatch) => {
   // console.log("action",obj.params)
   dispatch(getProductRequestObj());
   // console.log("action token",`Bearer ${localStorage.getItem("apnidukan")}`);
+  console.log(process.env.REACT_APP_BASE_URL,"product action");
   axios
-    .get("http://localhost:8080/products", {
+    .get(`${process.env.REACT_APP_BASE_URL}/products`, {
       params:obj,
       headers: {
         Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,

@@ -3,7 +3,8 @@ import * as types from "./auth.types";
 const initialState = {
   isError: false,
   isLoading: false,
-  token: null,
+  token: localStorage.getItem("token") || null,
+  isLoggedIn: false,
 };
 
 export const authReducer = (state = initialState, { type, payload }) => {
@@ -17,11 +18,11 @@ export const authReducer = (state = initialState, { type, payload }) => {
     }
 
     case types.REGISTRATION_SUCCESS: {
-      return { ...state, isLoading: false, isError: false };
+      return { ...state, isLoading: false, isError: false, };
     }
 
     case types.AUTH_SUCCESS: {
-      return { ...state, isLoading: false, isError: false, token: payload };
+      return { ...state, isLoading: false, isError: false, token: payload, isLoggedIn:true };
     }
 
     default: {
