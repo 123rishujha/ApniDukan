@@ -21,7 +21,6 @@ const AddProducts = () => {
   const [image, setImage] = useState("");
   const [soldBy, setSoldBy] = useState("");
   const [inStock, setInStock] = useState(true);
-  const [rating, setRatings] = useState({});
   const [features, setFeatures] = useState("");
 
   const [description, setDescription] = useState("");
@@ -67,12 +66,12 @@ const AddProducts = () => {
     setInStock(true);
     setSoldBy("");
     setFeatures([]);
-    setRatings({});
   };
 
   const postData = (data) => {
     axios.post(`${process.env.REACT_APP_BASE_URL}/products`, data, {
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
       },
     }).then((res) => {console.log(res); res.json(); console.log(res);});
@@ -193,15 +192,6 @@ const AddProducts = () => {
                   placeholder="Brand"
                 />
               </div>
-              {/* <div style={{ marginBottom: "20px" }}>
-                <FormLabel>strike price</FormLabel>
-                <Input
-                  value={strikePrice}
-                  onChange={(e) => setStrikePrice(e.currentTarget.value)}
-                  type="number"
-                  placeholder="strike price"
-                />
-              </div> */}
               <div style={{ marginBottom: "20px" }}>
                 <FormLabel>Price</FormLabel>
                 <Input

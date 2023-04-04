@@ -13,7 +13,7 @@ const Pagination = ({ totalPost, postPerPage,setCurrentPage,currentPage }) => {
     <div className={styles.pagination}>
       {pages.map((page, index) => {
         return (
-          <button  key={index} onClick={()=>setCurrentPage(page)} className={styles.page_item==currentPage ? 'active' : ''}  >
+          <button  key={index} onClick={()=>setCurrentPage(page)} className={styles.page_item===currentPage ? 'active' : ''}  >
             {page}
           </button>
         );
