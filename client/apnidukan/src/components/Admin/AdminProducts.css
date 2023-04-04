@@ -1,0 +1,16 @@
+.pagination{
+    display: flex;
+    gap: 7px;
+   justify-content: center;
+   list-style-type: none
+}
+
+.page-item{
+    /* border: 1px solid red; */
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px 7px;
+}
+.page-link{
+    padding: 5px 15px;
+}
