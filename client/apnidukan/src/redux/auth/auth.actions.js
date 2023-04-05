@@ -23,9 +23,12 @@ export const registrationSuccess = () => {
 export const registerUser = (payload) => async (dispatch) => {
   dispatch(authRequest());
   try {
-    const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/user/register`,payload);
+    const res = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/user/register`,
+      payload
+    );
     if (res.data.success) {
-        console.log(res);
+      console.log(res);
       dispatch(registrationSuccess());
     } else {
       dispatch(authError());
@@ -41,21 +44,17 @@ export const registerUser = (payload) => async (dispatch) => {
 export const loginSuccess = (payload) => async (dispatch) => {
   dispatch(authRequest());
   try {
-    console.log("called", payload);
-    console.log("action",payload);
+    console.log("action", payload);
     // const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/user/login`, payload);
-    const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/user/login`,payload);
-    console.log("res action",res);
-    const token = res.data.token
-    if (res.data.success) {
-      console.log("loginSuccess", res);
-      localStorage.setItem("apnidukan",token);
+    const res = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/user/login`,
+      payload
+    );
+    console.log("res action", res);
+    if (res.data.token) {
       dispatch(authSuccess(res.data.token));
-      alert("Login successful");
-    } else {
-      console.log(res.data.message);
-      dispatch(authError());
-      // alert("you got error");
+      console.log("auth action loginSuccess", res.data.token);
+      localStorage.setItem("apnidukan", res.data.token);
     }
   } catch (err) {
     console.log("login error from action", err);
@@ -63,16 +62,18 @@ export const loginSuccess = (payload) => async (dispatch) => {
   }
 };
 
-
 //Admin login - register
 
 // admin register
 export const registerAdmin = (payload) => async (dispatch) => {
   dispatch(authRequest());
   try {
-    const res = await axios.post(`http://localhost:8080/admin/register`,payload);
+    const res = await axios.post(
+      `http://localhost:8080/admin/register`,
+      payload
+    );
     if (res.data.success) {
-        console.log(res);
+      console.log(res);
       dispatch(registrationSuccess());
     } else {
       dispatch(authError());
@@ -88,14 +89,14 @@ export const loginSuccessAdmin = (payload) => async (dispatch) => {
   dispatch(authRequest());
   try {
     console.log("called", payload);
-    console.log("action",payload);
+    console.log("action", payload);
     // const res = await axios.post(`http://localhost:8080/user/login`, payload);
-    const res = await axios.post("http://localhost:8080/admin/login",payload);
-    console.log("res action",res);
-    const token = res.data.token
+    const res = await axios.post("http://localhost:8080/admin/login", payload);
+    console.log("res action", res);
+    const token = res.data.token;
     if (res.data.success) {
       console.log("Admin_loginSuccess", res);
-      localStorage.setItem("apnidukan",token);
+      localStorage.setItem("apnidukan", token);
       dispatch(authSuccess(res.data.token));
       alert("Admin Login successful");
     } else {
@@ -108,4 +109,3 @@ export const loginSuccessAdmin = (payload) => async (dispatch) => {
     dispatch(authError());
   }
 };
-

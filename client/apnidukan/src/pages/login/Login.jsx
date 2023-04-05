@@ -9,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
 //files
 import logo from "../../assets/logo.png";
@@ -22,74 +22,59 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
   const token = useSelector((store) => store.authReducer.token);
   const isError = useSelector((store) => store.authReducer.isError);
   const isLoading = useSelector((store) => store.authReducer.isLoading);
+  const isLoggedIn = useSelector((store) => store.authReducer.isLoggedIn);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const commingFrom = location?.state?.data || "/";
+  console.log(commingFrom);
+  console.log("login token from login ", token);
 
-  console.log(location);
-
-  useEffect(()=>{
-    if(location.pathname!='/login' && location.pathname!=""){
-      localStorage.setItem("location",location.pathname);
-    }
-  },[location]);
-
+  // console.log(location);
 
   const handleSubmit = () => {
     if (email.length === 0 || password.length === 0) {
       alert("please fill all the fields");
     } else {
       const payload = { email, password };
-      console.log("login", payload);
-      try{
+      try {
         dispatch(loginSuccess(payload));
-        console.log(location);
-        console.log(token);
-        navigate(localStorage.getItem("location") || "/");
-      }
-      catch(err){
-        alert("you got erro");
+        // console.log(isLoggedIn, "from login");
+        // navigate(commingFrom, { replace: true });
+      } catch (err) {
+        // alert("you got erro");
         console.log(err);
       }
     }
-
-    // const payload = { email, password };
-    // console.log(payload);
-    // axios
-    //   .post("${process.env.REACT_APP_BASE_URL}/user/login", payload)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
-
   };
 
-  useEffect(()=>{
-    if(isError){
-      alert("you got error please refresh and try again");
+  useEffect(() => {
+    if (isError) {
+      alert("sothing went wrong");
     }
-  },[isError]);
-  
-  useEffect(()=>{
-    console.log(token);
-    if(token){
-        return navigate("/");
+    if (isLoggedIn) {
+      navigate(commingFrom);
     }
-  },[token]);
+  }, [isError, token, isLoggedIn]);
 
-  if(isLoading){
-    return <h1>Loading...</h1>
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (token) {
+    return <Navigate to={commingFrom} />;
   }
 
   return (
     <Box width="90%" height="90%" boxSizing="border-box" margin="auto">
-      
       <VStack
         maxWidth="300px"
         minWidth="250px"
         // border="1px solid red"
         margin="auto"
-        marginTop='20px'
+        marginTop="20px"
       >
         <Image
           margin="auto"
@@ -100,7 +85,15 @@ const Login = () => {
           width="150px"
           alt="Logo"
         />
-        <div>Admin ? <button style={{color: "blue"}} onClick={() => navigate("/adminLogin")}>Click Here!</button></div>
+        <div>
+          Admin ?{" "}
+          <button
+            style={{ color: "blue" }}
+            onClick={() => navigate("/adminLogin")}
+          >
+            Click Here!
+          </button>
+        </div>
         <Box
           width="100%"
           margin="auto"
@@ -158,7 +151,6 @@ const Login = () => {
       </VStack>
     </Box>
   );
-
 };
 
 export default Login;

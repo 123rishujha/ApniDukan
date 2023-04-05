@@ -16,11 +16,15 @@ import {
 } from "@chakra-ui/react";
 
 import Styles from "./Cart.module.css";
-import { useNavigate } from 'react-router-dom';
-import { useSearchParams,createSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSearchParams, createSearchParams } from "react-router-dom";
 
 //redux funtions
-import { getCartSuccess,updateCartSuccess,deleteCartSuccess } from "../../redux/cart/cart.actions";
+import {
+  getCartSuccess,
+  updateCartSuccess,
+  deleteCartSuccess,
+} from "../../redux/cart/cart.actions";
 // import { updateCartSuccess } from '../../redux/cart/cart.actions';
 // import { deleteCartSuccess } from '../..redux/cart/'
 
@@ -32,23 +36,25 @@ const Cart = () => {
   const dispatch = useDispatch();
   const [order, setOrder] = useState([]); //selected products(_id);
   const [total, setTotal] = useState(0); //total amount
-  const [count,setCount] = useState(0); // total how many items going to be delivered
+  const [count, setCount] = useState(0); // total how many items going to be delivered
   // const [deliver, setDeliver] = useState([]); //product going for delivery
 
   const navigate = useNavigate();
-  const [searchParams,setSearchParams] = useSearchParams();
-
- 
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const findTotal = () => {
     let sum = 0;
     let totalProduct = 0;
-    for (let elem of cartData) {
-      if (order.includes(elem._id)) {
-        // setDeliver((prev) => [...prev, elem]);
-        console.log(elem.price,elem.discount,elem.qtn);
-        sum += calculateDetail(Number(elem.price), Number(elem.discount)) * Number(elem.qtn);
-        totalProduct += elem.qtn;
+    if (cartData) {
+      for (let elem of cartData) {
+        if (order.includes(elem._id)) {
+          // setDeliver((prev) => [...prev, elem]);
+          console.log(elem.price, elem.discount, elem.qtn);
+          sum +=
+            calculateDetail(Number(elem.price), Number(elem.discount)) *
+            Number(elem.qtn);
+          totalProduct += elem.qtn;
+        }
       }
     }
     setCount(totalProduct);
@@ -59,14 +65,13 @@ const Cart = () => {
     dispatch(getCartSuccess());
   }, []);
 
-  //setTotal 
+  //setTotal
   useEffect(() => {
     let x = findTotal();
-    console.log("x",x);
+    console.log("x", x);
     setTotal(x);
-  }, [order,cartData]);
+  }, [order, cartData]);
 
- 
   // the will calculate the deal price
   const calculateDetail = (price, discount) => {
     let off = Math.round((price * discount) / 100);
@@ -81,34 +86,33 @@ const Cart = () => {
   };
   // console.log(order);
   //will update the quantity
-  const handleQuantity = (quantity,id) =>{
-      console.log(quantity,id);
-      const payload = {qtn: Number(quantity)}
-      dispatch(updateCartSuccess(id,payload));
-  }
+  const handleQuantity = (quantity, id) => {
+    console.log(quantity, id);
+    const payload = { qtn: Number(quantity) };
+    dispatch(updateCartSuccess(id, payload));
+  };
 
-  const handleDelete = (id) =>{
+  const handleDelete = (id) => {
     console.log(id);
     console.log("delete called");
     dispatch(deleteCartSuccess(id));
-  }
+  };
 
   //move to checkout page;
-  const handleCheckOut = () =>{
+  const handleCheckOut = () => {
     const params = {};
     // console.log(order);
     let query = {};
-    if(order.length>0){
+    if (order.length > 0) {
       params._id = order;
-      query._id = order
+      query._id = order;
     }
     navigate({
-      pathname:"/checkout",
-      search: `?${createSearchParams(query)}`
+      pathname: "/checkout",
+      search: `?${createSearchParams(query)}`,
     });
     // setSearchParams(params);
-  }  
-
+  };
 
   return (
     <Box className={Styles.mainBox}>
@@ -146,19 +150,21 @@ const Cart = () => {
                           borderRadius="5px"
                           padding="2px"
                           fontWeight="200"
-                          display='flex'
-                          justifyContent='center'
+                          display="flex"
+                          justifyContent="center"
                           alignItems="center"
-                          maxWidth='100px'
+                          maxWidth="100px"
                         >
-                          Qty: 
+                          Qty:
                           <select
-                            padding='10px'
-                            size='sm'
-                            width='50%'
+                            padding="10px"
+                            size="sm"
+                            width="50%"
                             placeholder={`${elem.qtn}`}
                             value={elem.qtn}
-                            onChange={(e)=>handleQuantity(e.target.value,elem._id)}
+                            onChange={(e) =>
+                              handleQuantity(e.target.value, elem._id)
+                            }
                             className={Styles.optionsBoxChild}
                           >
                             <option>1</option>
@@ -166,13 +172,18 @@ const Cart = () => {
                             <option>3</option>
                           </select>
                         </Box>
-                        <Button onClick={()=>handleDelete(elem._id)} size="sm" variant="outline" colorScheme="red">
+                        <Button
+                          onClick={() => handleDelete(elem._id)}
+                          size="sm"
+                          variant="outline"
+                          colorScheme="red"
+                        >
                           Delete
                         </Button>
                       </Box>
                     </Stack>
                   </HStack>
-                  <VStack className={Styles.CardDetails} >
+                  <VStack className={Styles.CardDetails}>
                     <Text>{elem.title}</Text>
                     <Badge
                       colorScheme={elem.inStock ? "green" : "red"}
@@ -185,32 +196,39 @@ const Cart = () => {
                     </Text>
 
                     <HStack display={{ base: "none", md: "flex" }}>
-                        <Box
-                          background="#eaeded"
-                          borderRadius="5px"
-                          padding="2px"
-                          fontWeight="200"
-                          display='flex'
-                          justifyContent='center'
-                          alignItems="center"
-                          maxWidth='100px'
+                      <Box
+                        background="#eaeded"
+                        borderRadius="5px"
+                        padding="2px"
+                        fontWeight="200"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        maxWidth="100px"
+                      >
+                        Qty:
+                        <select
+                          padding="10px"
+                          size="sm"
+                          width="50%"
+                          placeholder={`${elem.qtn}`}
+                          value={elem.qtn}
+                          onChange={(e) =>
+                            handleQuantity(e.target.value, elem._id)
+                          }
+                          className={Styles.optionsBoxChild}
                         >
-                          Qty: 
-                          <select
-                            padding='10px'
-                            size='sm'
-                            width='50%'
-                            placeholder={`${elem.qtn}`}
-                            value={elem.qtn}
-                            onChange={(e)=>handleQuantity(e.target.value,elem._id)}
-                            className={Styles.optionsBoxChild}
-                          >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                          </select>
-                        </Box>
-                      <Button onClick={()=>handleDelete(elem._id)} size="sm" variant="outline" colorScheme="red">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                        </select>
+                      </Box>
+                      <Button
+                        onClick={() => handleDelete(elem._id)}
+                        size="sm"
+                        variant="outline"
+                        colorScheme="red"
+                      >
                         Delete
                       </Button>
                     </HStack>
@@ -221,9 +239,9 @@ const Cart = () => {
           </CheckboxGroup>
         </VStack>
         {/* checkOUt */}
-        <VStack className={Styles.checkOUt} >
+        <VStack className={Styles.checkOUt}>
           {order.length > 0 ? (
-            <Flex flexWrap='wrap' alignItems='center' gap='10px' >
+            <Flex flexWrap="wrap" alignItems="center" gap="10px">
               <Text fontSize="12px" color="teal">
                 Your order is eligible for Delivery.
               </Text>
@@ -233,8 +251,15 @@ const Cart = () => {
             </Flex>
           ) : (
             <Text>No Item selected</Text>
-            )}
-            <Button onClick={handleCheckOut} width='100%' background="yellow" isDisabled={order.length <=0}>checkout</Button>
+          )}
+          <Button
+            onClick={handleCheckOut}
+            width="100%"
+            background="yellow"
+            isDisabled={order.length <= 0}
+          >
+            checkout
+          </Button>
         </VStack>
       </Stack>
     </Box>

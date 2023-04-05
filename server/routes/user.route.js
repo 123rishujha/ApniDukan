@@ -65,7 +65,7 @@ userRoute.post("/login",async(req,res)=>{
         }
     }
     catch(err){
-        res.status(400).send({success:false,message:err});
+        res.status(400).send({success:false,message:"somthing went wrong",err:err});
     }
 });
 
