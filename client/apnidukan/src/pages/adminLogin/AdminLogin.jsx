@@ -113,7 +113,7 @@ const AdminLogin = () => {
           padding="20px"
           boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
         >
-          <Heading textAlign={"center"}>Sign in</Heading>
+          <Heading fontSize={"40px"} textAlign={"center"}>Admin Login</Heading>
           <VStack padding="10px" width="100%">
             <Input
               type="email"

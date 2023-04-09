@@ -79,7 +79,8 @@ const AdminSignup = () => {
                 <Input
                   type="text"
                   required
-                  placeholder="first and last name"
+                  fontSize={"small"}
+                  placeholder="Enter name here"
                   focusBorderColor="orange.400"
                   className={Styles.input}
                   value={name}
@@ -89,6 +90,8 @@ const AdminSignup = () => {
                 <Input
                   type="number"
                   required
+                  fontSize={"small"}
+                  placeholder="Enter contact number"
                   focusBorderColor="orange.400"
                   className={Styles.input}
                   value={mobile}
@@ -97,7 +100,9 @@ const AdminSignup = () => {
                 <FormLabel className={Styles.label}>Email number</FormLabel>
                 <Input
                   type="email"
+                  fontSize={"small"}
                   required
+                  placeholder="Enter emailID"
                   focusBorderColor="orange.400"
                   className={Styles.input}
                   value={email}
@@ -107,6 +112,8 @@ const AdminSignup = () => {
                 <Input
                   type="password"
                   required
+                  fontSize={"small"}
+                  placeholder="Enter Password here"
                   focusBorderColor="orange.400"
                   className={Styles.input}
                   value={password}
@@ -121,6 +128,8 @@ const AdminSignup = () => {
                 <Input
                   type="password"
                   required
+                  fontSize={"small"}
+                  placeholder="Re-enter Password here"
                   focusBorderColor="orange.400"
                   className={Styles.input}
                   value={confirmPassword}
