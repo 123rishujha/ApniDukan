@@ -51,34 +51,43 @@ const AdminProducts = () => {
   const numbers = [...Array(nPage + 1).keys()].slice(1);
 
   function prePage() {
-    
     if (currentPage !== 1) {
-      setCurrentPage(currentPage => currentPage-1);
-      console.log(currentPage)
+      setCurrentPage((currentPage) => currentPage - 1);
+      console.log(currentPage);
     }
   }
 
   function changeCurrentPage(id) {
     setCurrentPage(id);
-    console.log(currentPage)
+    console.log(currentPage);
   }
 
   function nextPage() {
     if (currentPage !== nPage) {
-      setCurrentPage(currentPage => currentPage + 1);
-      console.log(currentPage)
+      setCurrentPage((currentPage) => currentPage + 1);
+      console.log(currentPage);
     }
   }
 
   const getPrice = (id) => {
+    console.log("inside getPrice Function");
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/products/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/products`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
+          },
         },
-      })
+        {
+          params: {
+            ID: id,
+          },
+        }
+      )
       .then((res) => {
-        //console.log(res.data, res.data.price);
+        console.log(res);
+        // console.log("adfafdf",res.data, res.data.price);
         setEditPrice(res.data.price);
       })
       .catch((err) => console.log(err));
@@ -87,7 +96,7 @@ const AdminProducts = () => {
   const getData = () => {
     setIsLoading(true);
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/products/`, {
+      .get(`${process.env.REACT_APP_BASE_URL}products/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
         },
@@ -109,7 +118,14 @@ const AdminProducts = () => {
     //console.log("inside handleAdmin")
     setIsLoading(true);
     axios
-      .patch(`${process.env.REACT_APP_BASE_URL}/products/${id}`, { price: +editPrice })
+      .patch(`${process.env.REACT_APP_BASE_URL}/products/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH",
+        },
+        data: { price: +editPrice },
+      })
       .then((res) => {
         console.log(res);
         setIsLoading(false);
@@ -123,17 +139,21 @@ const AdminProducts = () => {
 
   // HANDLE DELETE FUNCTIONALITY
   const handleDelete = (id) => {
+    console.log("inside handleDelete");
     setIsLoading(true);
     axios
-      .delete(`${process.env.REACT_APP_BASE_URL}/products/${id}`, {
+      .delete(`${process.env.REACT_APP_BASE_URL}products/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
+          "Content-Type": "application/json"
         },
       })
       .then((res) => {
+        console.log("inside .then");
         setIsLoading(false);
         getData();
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   // HANDLING THE FILTERING PART
@@ -183,7 +203,7 @@ const AdminProducts = () => {
   const handleSort = (order) => {
     setIsLoading(true);
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/product`, {
+      .get(`${process.env.REACT_APP_BASE_URL}/products`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("apnidukan")}`,
         },
@@ -222,16 +242,18 @@ const AdminProducts = () => {
               return b.price - a.price;
             });
             setData(data);
-            //console.log(data);
+            console.log(data);
           }
         }
       })
       .catch((err) => console.log(err));
   };
 
+  // console.log("records", records)
+
   useEffect(() => {
     getData();
-  }, [setData,currentPage]);
+  }, [setData, currentPage]);
 
   return (
     <div
@@ -322,7 +344,7 @@ const AdminProducts = () => {
               borderRadius: "10px",
               background: "white",
             }}>
-            <TableContainer >
+            <TableContainer>
               <Table variant="simple">
                 {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
                 <Thead>
@@ -359,7 +381,7 @@ const AdminProducts = () => {
                   {records?.map((el, i) => {
                     return (
                       <Tr key={el._id}>
-                        <Td>{((currentPage-1)*10)+ i+1}</Td>
+                        <Td>{(currentPage - 1) * 10 + i + 1}</Td>
                         <Td>{el.category}</Td>
                         <Td
                           style={{
@@ -368,10 +390,10 @@ const AdminProducts = () => {
                             gap: "5px",
                           }}>
                           <img
-                          style={{ width: "100px", height: "100px" }}
-                          src={el.imageUrls[0]}
-                          alt={el.id}
-                        />
+                            style={{ width: "100px", height: "100px" }}
+                            src={el.imageUrls[0]}
+                            alt={el._id}
+                          />
                           <p>{el.title.substr(0, 30)}</p>
                         </Td>
                         <Td>{el.brand}</Td>
@@ -404,7 +426,7 @@ const AdminProducts = () => {
                                       onClose();
                                     }}>
                                     <FormControl>
-                                      <FormLabel>xxxx</FormLabel>
+                                      <FormLabel>Enter New Price</FormLabel>
                                       <Input
                                         isRequired
                                         value={editPrice}
